@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Database\Eloquent\Model;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -15,10 +16,18 @@ class AppServiceProvider extends ServiceProvider
     }
 
     /**
-     * Bootstrap any application services.
+ * Bootstrap application services.
+ */
+public function boot(): void
+{
+    /*
+     * Detect accidental lazy loading
+     * during development and testing.
+     *
+     * This helps us catch N+1 problems early.
      */
-    public function boot(): void
-    {
-        //
-    }
+    Model::preventLazyLoading(
+        ! app()->isProduction()
+    );
+}
 }
