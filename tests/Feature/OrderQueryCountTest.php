@@ -36,10 +36,6 @@ class OrderQueryCountTest extends TestCase
 
         $queryCountForFifteenOrders = $this->countQueriesForCurrentOrders();
 
-    dump([
-    'queries_for_5_orders' => $queryCountForFiveOrders,
-    'queries_for_15_orders' => $queryCountForFifteenOrders,
-        ]);
 
         $this->assertSame(
             $queryCountForFiveOrders,
